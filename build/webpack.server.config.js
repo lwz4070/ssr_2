@@ -1,5 +1,6 @@
 /*webpack.server.config.js*/
 const webpack = require('webpack');
+const path = require('path');
 const merge = require('webpack-merge');
 const base = require('./webpack.base.config');
 const nodeExternals = require('webpack-node-externals');
@@ -23,12 +24,12 @@ module.exports = merge(base, {
         filename: "bundle.server.js" //打包最终的文件名，这个文件是给node服务器使用的
     },
     //外置化应用程序依赖模块。可以使服务器构建速度更快
-    extensions: nodeExternals({
+    externals: nodeExternals({
         whitelist: /\.css$/
     }),
     plugins: [
         new webpack.DefinePlugin({
-            'process.env.NOE_ENV': JSON.stringify(process.env.NOE_ENV || 'development'),
+            'process.env.NODE_ENV': JSON.stringify(process.env.NOE_ENV || 'development'),
             'process.env.VUE_ENV': '"server"'
         }),
         // 这是将服务器的整个输出 构建为单个 JSON 文件的插件

@@ -4,14 +4,14 @@
 const path = require('path'); //获取路径对象
 const webpack = require('webpack');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');//抽离css样式,防止将样式打包在js中引起页面样式加载错乱的现象
-const isProd = process.env.NOE_ENV === 'production'; //判断运行环境
+const isProd = process.env.NODE_ENV === 'production'; //判断运行环境
 module.exports = {
     /*生产环境推荐：cheap-module-source-map 开发环境推荐：cheap-module-eval-source-map
     Webpack打包生成的.map后缀文件，使得我们的开发调试更加方便，它能帮助我们链接到断点对应的源代码的位置进行调试
     （//# souceURL），而devtool就是用来指定source-maps的配置方式的。*/
     devtool: isProd ? "#cheap-module-source-map" : "#cheap-module-eval-source-map",
     output: {
-        parh: path.resolve(__dirname, '../dist'),
+        path: path.resolve(__dirname, '../dist'),
         publicPath: '/',
         filename: '[name].[chunkhash].js' //用于长效缓存
     },
@@ -31,18 +31,21 @@ module.exports = {
         // 因为webpack2，这里必须是rules，如果使用use，会报错：vue this._init is not a function
         rules: [
             {
-                test: /\.vue/,
+                test: /\.vue$/,
                 use: {
-                    preserveWhitespace: false,
-                    postcss: [
-                        require('autoprefixer')({
-                            browers: ['last 3 versions']
-                        })
-                    ]
+                    loader: 'vue-loader',
+                    options: {
+                        preserveWhitespace: false,
+                        postcss: [
+                            require('autoprefixer')({
+                                browers: ['last 3 versions']
+                            })
+                        ]
+                    }
                 }
             },
             {
-                text: /\.js$/,
+                test: /\.js$/,
                 use: 'babel-loader',
                 exclude: /node_modules/
             },
