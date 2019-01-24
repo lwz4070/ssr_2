@@ -40,8 +40,9 @@ const serve = (path, cache) => express.static(resolve(path), {
 server.use('/dist', serve('./dist', true));
 server.use(serve(__dirname + '/dist'));
 server.get('*', (req, res) => {
-    res.setHeader("Content-type", "text/html;charset=UTF-8");
+    // res.setHeader("Content-type", "text/html;charset=UTF-8");
     const context = {
+        title: '服务端渲染SSR',
         url: req.url
     };
     //这里无需传入一个应用程序，因为在执行bundle 时已经自动创建过

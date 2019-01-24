@@ -23,15 +23,23 @@ const config = merge(base, {
             'process.env.VUE_ENV': '"server"'
         }),
         new webpack.optimize.CommonsChunkPlugin({
-            names: ['vendors', 'vues'],
-            minChunks: 3
+            names: 'vendor',
+            minChunks: function (module) {
+                //一个模块被提取到vendor chunk时
+                return (
+                    //如果他在 node_modules 中
+                    /node_modules/.test(module.context) &&
+                    //如果 request 是一个 CSS 文件，则无需外置化提取
+                    !/\.css$/.test(module.request)
+                )
+            }
         }),
         //重要信息： 这将webpack运行时分离到一个引导 chunk 中
         //以便可以在之后正确注入一步 chunk
         // 这也为应用程序/vendor代码提供了更好的缓存。
         new webpack.optimize.CommonsChunkPlugin({
-            names: 'manifest',
-            chunks: ['vendors', 'vues']
+            name: 'manifest',
+            //chunks: ['vendors', 'vues']
         }),
         //此插件在输出目录中 生成 'vue-ssr-client-manifest.json'
         new VueSSRClientPlugin()

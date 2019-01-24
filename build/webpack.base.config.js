@@ -37,7 +37,7 @@ module.exports = {
                     options: {
                         preserveWhitespace: false,
                         postcss: [
-                            require('autoprefixer')({
+                            require('autoprefixer')({ //处理浏览器兼容
                                 browers: ['last 3 versions']
                             })
                         ]
@@ -80,7 +80,16 @@ module.exports = {
             {
                 test: /\.json$/,
                 use: 'json-loader'
-            }
+            },
+            // {
+            //     test: /\.(less|css)$/,
+            //     use: isProd ?
+            //         ExtractTextPlugin.extract({
+            //             use: ['css-loader?minimize','less-loader'],
+            //             fallback: 'vue-style-loader'
+            //         }) :
+            //         ['vue-style-loader', 'css-loader', 'less-loader']
+            // }
         ]
     },
     //性能

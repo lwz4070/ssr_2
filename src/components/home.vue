@@ -1,6 +1,6 @@
 <!--home.vue-->
 <template>
-    <div>
+    <div class="index">
         首页
     </div>
 </template>
@@ -11,6 +11,8 @@
         }
     }
 </script>
-<style>
-
+<style scoped>
+    .index {
+        color: red;
+    }
 </style>
