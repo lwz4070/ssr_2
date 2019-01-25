@@ -1,14 +1,14 @@
 {
   "publicPath": "/",
   "all": [
-    "app.cb18f23473f099786496.js",
+    "app.8479704cc7bc1f5c7524.js",
     "vendor.5470e13311712b247522.js",
-    "manifest.ee6cdacbdf42e23e3b16.js"
+    "manifest.31873947e7298382978e.js"
   ],
   "initial": [
-    "manifest.ee6cdacbdf42e23e3b16.js",
+    "manifest.31873947e7298382978e.js",
     "vendor.5470e13311712b247522.js",
-    "app.cb18f23473f099786496.js"
+    "app.8479704cc7bc1f5c7524.js"
   ],
   "async": [],
   "modules": {

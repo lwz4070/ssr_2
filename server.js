@@ -34,7 +34,7 @@ const serve = (path, cache) => express.static(resolve(path), {
     maxAge: cache && isProd ? 1000 * 60 * 60 * 24 * 30 : 0 //缓存时间设置
 })
 //use与get、post不同的是，他的网址不是精确匹配的。而是能够有文件夹拓展的
-//提供静态资源
+//提供静态资源 设置静态文件目录
 //为了给静态资源文件创建一个虚拟的文件前缀(实际上文件系统中并不存在) ，可以使用 express.static 函数指定一个虚拟的静态目录
 //http://localhost:8085/dist  使用 /dist 作为前缀来加载 ./dist 文件夹下的文件
 server.use('/dist', serve('./dist', true));
@@ -45,6 +45,7 @@ server.get('*', (req, res) => {
         title: '服务端渲染SSR',
         url: req.url
     };
+    console.log("==context===", context);
     //这里无需传入一个应用程序，因为在执行bundle 时已经自动创建过
     // 现在我们的服务器与应用程序已经解耦
     renderer.renderToString(context, (err, html) => {
