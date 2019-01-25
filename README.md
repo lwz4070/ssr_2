@@ -6,7 +6,8 @@
 ----
 
 下面是Vue官方给出的一张服务器渲染示意图：
-https://github.com/ZengTianShengZ/My-Blog/raw/master/%E6%9C%8D%E5%8A%A1%E7%AB%AF%E6%B8%B2%E6%9F%93-Vue-ssr/image/img1.png
+
+![img1](/Users/weidian/Pictures/img1.png)
 
 流程图大致意思是： 将Source（源码）通过webpack打包出两个bundle，其中Server Bundle是给服务端用的，服务端通过渲染器bundleRenderer将bundle生产html给浏览器用；另一个Client Bundle是给浏览器用的。服务端只是前期生成首屏所需的html，后期的交互和数据处理还是要能支持浏览器脚本的Client Bundle来完成的。接下来开始实现它：
 
